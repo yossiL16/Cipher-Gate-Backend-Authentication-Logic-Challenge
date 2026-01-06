@@ -59,9 +59,16 @@ app.post('/verify', async (req,res) => {
 
 app.post('/decode-message', async (req,res) => {
     try{
-        const {username, password} = req.body;
-        if()
-    }
+        const {username, message} = req.body;
+        if(!(username in verifiedUsers)) {return res.send("user not found")}
+        for(let i = 0; i === message.length -1; i++){
+            if (message[i] > message[i + 1]){return res.send(-1)}
+        }
+        res.json({msg: message})
+} catch(err){
+    console.log(err);
+    res.status(500).json({error:err})   
+}
 })
 
 
